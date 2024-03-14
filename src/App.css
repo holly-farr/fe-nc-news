@@ -53,12 +53,7 @@ li {
   }
 }
 
-.article-card-img {
-  max-width: 350px;
-  height: auto;
-}
-
-.articles {
+.articles-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -72,6 +67,16 @@ li {
   max-width: 350px;
 }
 
+.article-card-img {
+  max-width: 350px;
+  height: auto;
+}
+
+.read-article-button {
+  background-color: #213547;
+  color: white;
+}
+
 .single-article-img {
   max-width: 600px;
   margin: 15px;
@@ -82,10 +87,13 @@ li {
   text-align: left;
 }
 
-.article-votes-comments {
-  font-size: 1.2em;
-  display: flex;
-  justify-content: space-evenly;
+.article-votes {
+  justify-content: center;
+  margin: 10px;
+}
+
+.vote-count {
+  margin: 10px;
 }
 
 .comments-list {

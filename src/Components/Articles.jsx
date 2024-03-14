@@ -20,7 +20,7 @@ export default function Articles() {
   ) : (
     <div>
       <h1>Catch up with the latest news</h1>
-      <ul className="articles">
+      <ul className="articles-list">
         {articleList.map((article) => (
           <ArticleCard article={article} key={article.article_id} />
         ))}
