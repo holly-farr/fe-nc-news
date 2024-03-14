@@ -2,13 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
+import UserContext from "./UserContext";
+import { useContext } from "react";
 
 export default function ArticlePage() {
   const { article_id } = useParams();
+  const { currentUser } = useContext(UserContext);
 
   const [singleArticle, setSingleArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [articleVotes, setArticleVotes] = useState({});
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     axios
@@ -30,42 +33,64 @@ export default function ArticlePage() {
   const upVote = (e) => {
     e.preventDefault();
 
-    setSingleArticle(() => {
-      return { ...singleArticle, votes: singleArticle.votes + 1 };
-    });
+    if (!clicked) {
+      setClicked(true);
 
-    const patchVote = () => {
-      const patchBody = { inc_votes: 1 };
-      axios
-        .patch(
-          `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
-          patchBody
-        )
-        .then((article) => {
-          return article;
-        });
-    };
-    patchVote();
+      setSingleArticle(() => {
+        return { ...singleArticle, votes: singleArticle.votes + 1 };
+      });
+
+      const patchVote = () => {
+        const patchBody = { inc_votes: 1 };
+        axios
+          .patch(
+            `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
+            patchBody
+          )
+          .catch((err) => {
+            setSingleArticle(() => {
+              return { ...singleArticle, votes: singleArticle.votes - 1 };
+            });
+          })
+          .then((article) => {
+            return article;
+          });
+      };
+      patchVote();
+    } else if (setClicked(true)) {
+      return article;
+    }
   };
 
   const downVote = (e) => {
     e.preventDefault();
 
-    setSingleArticle(() => {
-      return { ...singleArticle, votes: singleArticle.votes - 1 };
-    });
-    const patchVote = () => {
-      const patchBody = { inc_votes: -1 };
-      axios
-        .patch(
-          `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
-          patchBody
-        )
-        .then((article) => {
-          return article;
-        });
-    };
-    patchVote();
+    if (!clicked) {
+      setClicked(true);
+
+      setSingleArticle(() => {
+        return { ...singleArticle, votes: singleArticle.votes - 1 };
+      });
+      const patchVote = () => {
+        const patchBody = { inc_votes: -1 };
+        axios
+          .patch(
+            `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
+            patchBody
+          )
+          .catch((err) => {
+            setSingleArticle(() => {
+              return { ...singleArticle, votes: singleArticle.votes + 1 };
+            });
+          })
+          .then((article) => {
+            return article;
+          });
+      };
+      patchVote();
+    } else if (setClicked(true)) {
+      return article;
+    }
   };
 
   return isLoading ? (

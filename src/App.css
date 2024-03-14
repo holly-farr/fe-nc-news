@@ -116,3 +116,28 @@ li {
 .comment-date {
   width: 100%;
 }
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user {
+  display: block;
+  border: rgb(0, 0, 98) solid;
+  margin: 10px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 250px;
+}
+
+.user-img {
+  max-width: 200px;
+  max-height: 200px;
+  padding: 10px;
+  }
+
+.user-login-button {
+  background-color: #213547;
+  color: white;
+}
