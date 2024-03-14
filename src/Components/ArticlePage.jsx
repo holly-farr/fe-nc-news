@@ -8,6 +8,7 @@ export default function ArticlePage() {
 
   const [singleArticle, setSingleArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [articleVotes, setArticleVotes] = useState({});
 
   useEffect(() => {
     axios
@@ -26,6 +27,47 @@ export default function ArticlePage() {
       );
   }, []);
 
+  const upVote = (e) => {
+    e.preventDefault();
+
+    setSingleArticle(() => {
+      return { ...singleArticle, votes: singleArticle.votes + 1 };
+    });
+
+    const patchVote = () => {
+      const patchBody = { inc_votes: 1 };
+      axios
+        .patch(
+          `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
+          patchBody
+        )
+        .then((article) => {
+          return article;
+        });
+    };
+    patchVote();
+  };
+
+  const downVote = (e) => {
+    e.preventDefault();
+
+    setSingleArticle(() => {
+      return { ...singleArticle, votes: singleArticle.votes - 1 };
+    });
+    const patchVote = () => {
+      const patchBody = { inc_votes: -1 };
+      axios
+        .patch(
+          `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
+          patchBody
+        )
+        .then((article) => {
+          return article;
+        });
+    };
+    patchVote();
+  };
+
   return isLoading ? (
     <h2>Loading..</h2>
   ) : (
@@ -35,10 +77,24 @@ export default function ArticlePage() {
       <h3>{singleArticle.created_at.slice(0, 10)}</h3>
       <img className="single-article-img" src={singleArticle.article_img_url} />
       <p className="single-article-body">{singleArticle.body}</p>
-      <div className="article-votes-comments">
-        <h3>Votes: {singleArticle.votes}</h3>
-        <h3>Comments: {singleArticle.comment_count}</h3>
-      </div>
+      <h3 className="vote-count">Votes: {singleArticle.votes}</h3>
+      <button
+        className="article-votes"
+        article_id={singleArticle.article_id}
+        onClick={upVote}
+      >
+        🔼
+      </button>
+      <button className="article-votes" onClick={downVote}>
+        🔽
+      </button>
+      {(() => {
+        if (singleArticle.comment_count === 0) {
+          return <h3>No comments yet!</h3>;
+        } else {
+          return <h3>Comments: {singleArticle.comment_count}</h3>;
+        }
+      })()}
       <Comments
         article_id={singleArticle.article_id}
         key={singleArticle.article_id}
