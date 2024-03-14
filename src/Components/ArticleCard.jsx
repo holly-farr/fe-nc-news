@@ -8,8 +8,8 @@ export default function ArticleCard({ article }) {
       <img className="article-card-img" src={article_img_url} />
       <h3> {title}</h3>
       <h4> {author}</h4>
-      <p> {topic}</p>
-      <p>{votes}</p>
+      <h5> {topic}</h5>
+      <h4>{votes}</h4>
       <Link to={`/articles/${article_id}`}>
         <button className="read-article-button">Read Article</button>
       </Link>

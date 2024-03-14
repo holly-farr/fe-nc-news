@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import UserContext from "./UserContext";
+import { useContext } from "react";
 
 export default function Comments({ article_id }) {
+  const { currentUser } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
