@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function ArticleCard({ article }) {
+  
   const { article_id, author, title, topic, votes, article_img_url } = article;
 
   return (
