@@ -79,4 +79,32 @@ li {
 
 .single-article-body {
   margin: 15px;
+  text-align: left;
+}
+
+.article-votes-comments {
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.comments-list {
+  text-align: left;
+}
+
+.comment-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.comment-author {
+  margin-right: 15px;
+}
+
+.comment-votes {
+  color: rgb(4, 114, 4);
+}
+
+.comment-date {
+  width: 100%;
 }
