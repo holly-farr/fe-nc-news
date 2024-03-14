@@ -53,7 +53,7 @@ li {
   }
 }
 
-img {
+.article-card-img {
   max-width: 350px;
   height: auto;
 }
@@ -70,4 +70,13 @@ img {
   padding: 10px;
   font-family: Arial, Helvetica, sans-serif;
   max-width: 350px;
+}
+
+.single-article-img {
+  max-width: 600px;
+  margin: 15px;
+}
+
+.single-article-body {
+  margin: 15px;
 }
