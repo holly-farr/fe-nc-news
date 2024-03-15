@@ -22,7 +22,7 @@ export default function Users() {
       <h1>All Users</h1>
       <ul className="user-list">
         {users.map((user) => (
-          <UserCard user={user} />
+          <UserCard user={user} key={user.username} />
         ))}
       </ul>
     </div>
