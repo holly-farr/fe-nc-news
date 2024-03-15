@@ -9,6 +9,7 @@ import Users from "./Components/Users";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [articleList, setArticleList] = useState([]);
 
   return (
     <>
@@ -17,7 +18,15 @@ function App() {
       >
         <Header />
         <Routes>
-          <Route path="/articles" element={<Articles />} />
+          <Route
+            path="/articles"
+            element={
+              <Articles
+                articleList={articleList}
+                setArticleList={setArticleList}
+              />
+            }
+          />
           <Route path="/articles/:article_id" element={<ArticlePage />} />
           <Route path="/users" element={<Users />} />
         </Routes>
@@ -25,5 +34,6 @@ function App() {
     </>
   );
 }
+8;
 
 export default App;

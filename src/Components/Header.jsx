@@ -14,17 +14,15 @@ export default function Header() {
           <Link to="/users">Current User: {currentUser.username}</Link>
         </li>
       </ul>
-      <form className="menu">
-        <li className="nav-list-item">
-          <label htmlFor="search">Search NC News: </label>
-          <input id="search" type="text" placeholder="search..."></input>
-        </li>
+      <form className="search">
+          <label id="search-label" htmlFor="search">Search:</label>
+          <input id="search" type="text" placeholder=" search NC News..."></input>
       </form>
       <ul className="menu">
         <li className="nav-list-item">
           <Link to="/articles">Articles</Link>
         </li>
-        <li className="nav-list-item">Topics</li>
+        <li className="nav-list-item"><Link to="/topics">Topics</Link></li>
         <li className="nav-list-item">
           <Link to="/users">Users</Link>
         </li>

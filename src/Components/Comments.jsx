@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UserContext from "./UserContext";
 import { useContext } from "react";
+import CommentAdder from "./CommentAdder";
 
 export default function Comments({ article_id }) {
   const { currentUser } = useContext(UserContext);
@@ -23,6 +24,7 @@ export default function Comments({ article_id }) {
     <h3>Comments loading...</h3>
   ) : (
     <section>
+      <CommentAdder article_id={article_id} setComments={setComments} />
       <ol className="comments-list">
         {comments.map((comment) => {
           return (

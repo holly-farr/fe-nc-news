@@ -15,6 +15,17 @@ nav {
   display: flex;
   list-style-type: none;
   font-size: 1.4em;
+  width: 100%;
+}
+
+.search {
+  display: flex;
+  list-style-type: none;
+  font-size: 1.4em;
+  width: 100%;
+  justify-content: center;
+  color: #0a4572;
+  font-weight: 500;
 }
 
 h1 {
@@ -117,6 +128,21 @@ li {
   width: 100%;
 }
 
+.post-comment-form {
+  display: flex;
+  justify-content: center;
+}
+
+#newComment {
+  margin-right: 10px;
+}
+
+
+.add-comment-button {
+  background-color: #213547;
+  color: white;
+}
+
 .user-list {
   display: flex;
   flex-wrap: wrap;
@@ -135,9 +161,30 @@ li {
   max-width: 200px;
   max-height: 200px;
   padding: 10px;
-  }
+}
 
 .user-login-button {
+  background-color: #213547;
+  color: white;
+}
+
+
+.topic-filters {
+  margin: 20px;
+  padding: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  color:rgb(18, 51, 90);
+  font-weight: bold;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+option {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.filter-articles-button {
   background-color: #213547;
   color: white;
 }
