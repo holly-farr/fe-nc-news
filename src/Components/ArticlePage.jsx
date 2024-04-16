@@ -1,9 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import Comments from "./Comments";
+
 import UserContext from "./UserContext";
-import { useContext } from "react";
+
+import { getArticleById, updateArticleVotes } from "../../Utils/api";
+import Comments from "./Comments";
+
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function ArticlePage() {
   const { article_id } = useParams();
@@ -14,20 +17,10 @@ export default function ArticlePage() {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://nc-news-backend-wuav.onrender.com/api/articles/${article_id}`
-      )
-      .then(
-        ({
-          data: {
-            article: [singleArticle],
-          },
-        }) => {
-          setSingleArticle(singleArticle);
-          setIsLoading(false);
-        }
-      );
+    getArticleById(article_id).then((singleArticle) => {
+      setSingleArticle(singleArticle);
+      setIsLoading(false);
+    });
   }, []);
 
   const upVote = (e) => {
@@ -35,30 +28,26 @@ export default function ArticlePage() {
 
     if (!clicked) {
       setClicked(true);
-
       setSingleArticle(() => {
         return { ...singleArticle, votes: singleArticle.votes + 1 };
       });
-
       const patchVote = () => {
         const patchBody = { inc_votes: 1 };
-        axios
-          .patch(
-            `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
-            patchBody
-          )
-          .catch((err) => {
-            setSingleArticle(() => {
-              return { ...singleArticle, votes: singleArticle.votes - 1 };
-            });
+        updateArticleVotes(article_id, patchBody)
+          .then((singleArticle) => {
+            return singleArticle;
           })
-          .then((article) => {
-            return article;
+          .catch((err) => {
+            if (err) {
+              setSingleArticle(() => {
+                return { ...singleArticle, votes: singleArticle.votes - 1 };
+              });
+            }
           });
       };
       patchVote();
-    } else if (setClicked(true)) {
-      return article;
+    } else if (clicked) {
+      setClicked(true);
     }
   };
 
@@ -67,39 +56,39 @@ export default function ArticlePage() {
 
     if (!clicked) {
       setClicked(true);
-
       setSingleArticle(() => {
         return { ...singleArticle, votes: singleArticle.votes - 1 };
       });
       const patchVote = () => {
         const patchBody = { inc_votes: -1 };
-        axios
-          .patch(
-            `https://nc-news-backend-wuav.onrender.com/api/articles/${singleArticle.article_id}`,
-            patchBody
-          )
-          .catch((err) => {
-            setSingleArticle(() => {
-              return { ...singleArticle, votes: singleArticle.votes + 1 };
-            });
+        updateArticleVotes(article_id, patchBody)
+          .then((singleArticle) => {
+            return singleArticle;
           })
-          .then((article) => {
-            return article;
+          .catch((err) => {
+            if (err) {
+              setSingleArticle(() => {
+                return { ...singleArticle, votes: singleArticle.votes + 1 };
+              });
+            }
           });
       };
       patchVote();
-    } else if (setClicked(true)) {
-      return article;
+    } else if (clicked) {
+      setClicked(true);
     }
   };
 
   return isLoading ? (
-    <h2>Loading..</h2>
+    <div className="loading">
+      <h2>Loading...</h2>
+      <ClipLoader />
+    </div>
   ) : (
     <div className="single-article-page">
       <h1>{singleArticle.title}</h1>
       <h2>{singleArticle.author}</h2>
-      <h3>{singleArticle.created_at.slice(0, 10)}</h3>
+
       <img className="single-article-img" src={singleArticle.article_img_url} />
       <p className="single-article-body">{singleArticle.body}</p>
       <h3 className="vote-count">Votes: {singleArticle.votes}</h3>

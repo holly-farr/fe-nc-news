@@ -1,27 +1,30 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import UserContext from "./UserContext";
-import { useContext } from "react";
-import CommentAdder from "./CommentAdder";
+import { useParams } from "react-router-dom";
 
-export default function Comments({ article_id }) {
+import CommentAdder from "./CommentAdder";
+import { getArticleComments } from "../../Utils/api";
+
+import ClipLoader from "react-spinners/ClipLoader";
+
+export default function Comments() {
+  const { article_id } = useParams();
   const { currentUser } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://nc-news-backend-wuav.onrender.com/api/articles/${article_id}/comments`
-      )
-      .then(({ data: { comments } }) => {
-        setComments(comments);
-        setIsLoading(false);
-      });
+    getArticleComments(article_id).then((comments) => {
+      setComments(comments);
+      setIsLoading(false);
+    });
   }, []);
 
   return isLoading ? (
-    <h3>Comments loading...</h3>
+    <div className="loading">
+      <h3>Loading comments...</h3>
+      <ClipLoader />
+    </div>
   ) : (
     <section>
       <CommentAdder article_id={article_id} setComments={setComments} />

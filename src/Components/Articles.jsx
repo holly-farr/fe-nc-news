@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
+
 import ArticleCard from "./ArticleCard";
-import axios from "axios";
+import {getAllArticles} from "../../Utils/api";
+
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Articles({ articleList, setArticleList }) {
   const [isLoading, setIsLoading] = useState(true);
   const [topic, setTopic] = useState("");
 
   useEffect(() => {
-    axios
-      .get("https://nc-news-backend-wuav.onrender.com/api/articles")
-      .then(({ data: { articles } }) => {
-        setArticleList(articles);
-        setIsLoading(false);
-      });
+    getAllArticles().then((articles) => {
+      setArticleList(articles);
+      setIsLoading(false);
+    });
   }, []);
 
   function handleSetTopic(e) {
@@ -20,7 +21,10 @@ export default function Articles({ articleList, setArticleList }) {
   }
 
   return isLoading ? (
-    <h3>Loading...</h3>
+    <div className="loading">
+      <h2>Loading...</h2>
+      <ClipLoader />
+    </div>
   ) : (
     <div>
       <h1>Catch up with the latest news</h1>

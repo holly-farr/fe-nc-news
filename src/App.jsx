@@ -1,7 +1,8 @@
 import { useState } from "react";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import UserContext from "./Components/UserContext";
+
+import "./App.css";
 import Header from "./Components/Header";
 import Articles from "./Components/Articles";
 import ArticlePage from "./Components/ArticlePage";
@@ -33,7 +34,6 @@ function App() {
       </UserContext.Provider>
     </>
   );
-}
-8;
+};
 
 export default App;
