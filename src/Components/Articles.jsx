@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import ArticleCard from "./ArticleCard";
-import {getAllArticles} from "../../Utils/api";
+import { getAllArticles } from "../../Utils/api";
 
 import ClipLoader from "react-spinners/ClipLoader";
 

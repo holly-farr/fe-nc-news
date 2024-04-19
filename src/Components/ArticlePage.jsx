@@ -7,6 +7,8 @@ import { getArticleById, updateArticleVotes } from "../../Utils/api";
 import Comments from "./Comments";
 
 import ClipLoader from "react-spinners/ClipLoader";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 
 export default function ArticlePage() {
   const { article_id } = useParams();
@@ -97,16 +99,16 @@ export default function ArticlePage() {
         article_id={singleArticle.article_id}
         onClick={upVote}
       >
-        🔼
+        <ThumbUpOffAltIcon />
       </button>
       <button className="article-votes" onClick={downVote}>
-        🔽
+        <ThumbDownOffAltIcon />
       </button>
       {(() => {
         if (singleArticle.comment_count === 0) {
           return <h3>No comments yet!</h3>;
         } else {
-          return <h3>Comments: {singleArticle.comment_count}</h3>;
+          return <h2>Comments: {singleArticle.comment_count}</h2>;
         }
       })()}
       <Comments

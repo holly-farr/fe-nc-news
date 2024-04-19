@@ -24,11 +24,19 @@ export const getArticleComments = (article_id) => {
     });
 };
 
+export const postArticleComment = (article_id, body) => {
+  return api
+    .post(`/articles/${article_id}/comments`, body)
+    .then(({ data: { comment } }) => {
+      return comment.body;
+    });
+};
+
 export const updateArticleVotes = (article_id, patchBody) => {
   return api
     .patch(`/articles/${article_id}`, patchBody)
     .then(({ data: { article } }) => {
-      return article[0]
+      return article[0];
     });
 };
 

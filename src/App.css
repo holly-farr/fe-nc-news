@@ -128,18 +128,20 @@ li {
   width: 100%;
 }
 
-.post-comment-form {
-  display: flex;
-  justify-content: center;
+#newComment {
+  margin-right: 10px;
 }
 
 #newComment {
-  margin-right: 10px;
+  border-radius: 8px;
+  border-color: #213547;
+  padding: 12px;
 }
 
 .add-comment-button {
   background-color: #213547;
   color: white;
+  border-radius: 20px;
 }
 
 .user-list {

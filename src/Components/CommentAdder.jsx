@@ -1,10 +1,15 @@
-import axios from "axios";
 import { useContext, useState } from "react";
 import UserContext from "./UserContext";
+
+import { postArticleComment } from "../../Utils/api";
+
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function CommentAdder({ article_id, setComments }) {
   const [newComment, setNewComment] = useState("");
   const { currentUser } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [commentError, setCommentError] = useState(false);
 
   function handlePostComment(e) {
     e.preventDefault();
@@ -14,39 +19,43 @@ export default function CommentAdder({ article_id, setComments }) {
       body: newComment,
     };
 
-    axios
-      .post(
-        `https://nc-news-backend-wuav.onrender.com/api/articles/${article_id}/comments`,
-        body
-      )
-      .then(({ newPostedComment }) => {
+    postArticleComment(article_id, body)
+      .then((newComment) => {
         setNewComment("");
         setComments((currComments) => {
-          [newPostedComment, ...currComments];
+          [newComment, ...currComments];
         });
       })
-      .catch((err) => {
-        console.log(err)
-        setNewComment((e.target.value = "Login to add comment"));
+      .catch((commentError) => {
+        setCommentError(true);
       });
   }
 
-  return (
-    <div className="post-comment-section">
-      <h3>Add comment...</h3>
-      <form className="post-comment-form" onSubmit={handlePostComment}>
-        <label htmlFor="newComment"></label>
-        <input
-          type="text"
-          id="newComment"
-          value={newComment}
-          onChange={(e) => {
-            setNewComment(e.target.value);
-          }}
-          required
-        ></input>
-        <button className="add-comment-button">Add Comment</button>
-      </form>
+  return isLoading ? (
+    <div className="loading">
+      <h3>Loading comments...</h3>
+      <ClipLoader />
     </div>
+  ) : (
+    <form className="post-comment-form" onSubmit={handlePostComment}>
+      <label htmlFor="newComment"></label>
+      {commentError && (
+        <h4 id="postCommentError">
+          Oops! You need to be logged in to post a comment.
+        </h4>
+      )}
+      <input
+        type="text"
+        placeholder="Your comment..."
+        id="newComment"
+        aria-multiline="true"
+        value={newComment}
+        onChange={(e) => {
+          setNewComment(e.target.value);
+        }}
+        required
+      ></input>
+      <button className="add-comment-button">Add Comment</button>
+    </form>
   );
 }
