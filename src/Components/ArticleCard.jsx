@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function ArticleCard({ article, topic }) {
-
   return (
     <li className="article-card">
       <img className="article-card-img" src={article.article_img_url} />
@@ -13,5 +12,5 @@ export default function ArticleCard({ article, topic }) {
         <button className="read-article-button">Read Article</button>
       </Link>
     </li>
-  )
+  );
 }

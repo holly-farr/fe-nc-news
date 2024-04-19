@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import UserCard from "./UserCard";
+import { getAllUsers } from "../../Utils/api";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Users() {
   const [users, setSingleUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("https://nc-news-backend-wuav.onrender.com/api/users")
-      .then(({ data: { users } }) => {
+    getAllUsers()
+      .then((users) => {
         setSingleUser(users);
         setIsLoading(false);
       });
   }, []);
 
   return isLoading ? (
-    <h3>Loading users...</h3>
+    <div className="loading">
+      <h2>Loading...</h2>
+      <ClipLoader />
+    </div>
   ) : (
     <div>
       <h1>All Users</h1>

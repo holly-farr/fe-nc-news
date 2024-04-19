@@ -128,19 +128,20 @@ li {
   width: 100%;
 }
 
-.post-comment-form {
-  display: flex;
-  justify-content: center;
-}
-
 #newComment {
   margin-right: 10px;
 }
 
+#newComment {
+  border-radius: 8px;
+  border-color: #213547;
+  padding: 12px;
+}
 
 .add-comment-button {
   background-color: #213547;
   color: white;
+  border-radius: 20px;
 }
 
 .user-list {
@@ -168,12 +169,11 @@ li {
   color: white;
 }
 
-
 .topic-filters {
   margin: 20px;
   padding: 15px;
   font-family: Arial, Helvetica, sans-serif;
-  color:rgb(18, 51, 90);
+  color: rgb(18, 51, 90);
   font-weight: bold;
   display: flex;
   justify-content: space-evenly;
