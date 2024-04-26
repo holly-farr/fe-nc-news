@@ -87,12 +87,14 @@ export default function ArticlePage() {
       <ClipLoader />
     </div>
   ) : (
-    <div className="single-article-page">
+    <div id="single-article-page">
       <h1>{singleArticle.title}</h1>
       <h2>{singleArticle.author}</h2>
 
       <img className="single-article-img" src={singleArticle.article_img_url} />
+      <div id="article-body-box">
       <p className="single-article-body">{singleArticle.body}</p>
+      </div>
       <h3 className="vote-count">Votes: {singleArticle.votes}</h3>
       <button
         className="article-votes"
@@ -108,7 +110,7 @@ export default function ArticlePage() {
         if (singleArticle.comment_count === 0) {
           return <h3>No comments yet!</h3>;
         } else {
-          return <h2>Comments: {singleArticle.comment_count}</h2>;
+          return <h2>Show Comments ({singleArticle.comment_count})</h2>;
         }
       })()}
       <Comments

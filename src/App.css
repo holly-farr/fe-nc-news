@@ -1,67 +1,55 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-}
-
-nav {
-  border: solid #213547;
-  justify-self: center;
+  background-color: #213547;
+  width: 100%;
+  height: 100%;
 }
 
 .menu {
+  background-color: white;
+  display: flex;
   justify-content: space-evenly;
-  display: flex;
-  list-style-type: none;
-  font-size: 1.4em;
-  width: 100%;
+  padding: 20px;
 }
 
-.search {
-  display: flex;
-  list-style-type: none;
-  font-size: 1.4em;
-  width: 100%;
-  justify-content: center;
-  color: #0a4572;
+.nav-list-item {
+  color: #213547;
+  font-size: 1.6em;
   font-weight: 500;
+  text-decoration: inherit;
 }
 
-h1 {
-  justify-self: center;
+#search-form {
+  display: flex;
+  justify-content: center;
 }
 
-li {
-  list-style: none;
+#search {
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #151a75aa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+#search-icon {
+  color: rgb(22, 37, 149);
+  font-size: xx-large;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+select {
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  border-radius: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+option {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.filter-articles-button {
+  background-color: white;
+  color: #213547;
 }
 
 .articles-list {
@@ -71,21 +59,27 @@ li {
 }
 
 .article-card {
-  border: rgb(0, 0, 98) solid;
+  border-radius: 15px;
   margin: 10px;
-  padding: 10px;
+  padding: 15px;
   font-family: Arial, Helvetica, sans-serif;
   max-width: 350px;
+  background-color: white;
 }
 
-.article-card-img {
+#article-card-img {
   max-width: 350px;
   height: auto;
 }
 
-.read-article-button {
+.card-button {
   background-color: #213547;
   color: white;
+  font-weight: bold;
+  padding: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 20px;
 }
 
 .single-article-img {
@@ -94,8 +88,8 @@ li {
 }
 
 .single-article-body {
-  margin: 15px;
-  text-align: left;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .article-votes {
@@ -104,16 +98,20 @@ li {
 }
 
 .vote-count {
+  color: white;
   margin: 10px;
 }
 
 .comments-list {
   text-align: left;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .comment-info {
   display: flex;
   flex-wrap: wrap;
+  color: white;
 }
 
 .comment-author {
@@ -130,28 +128,28 @@ li {
 
 #newComment {
   margin-right: 10px;
-}
-
-#newComment {
   border-radius: 8px;
-  border-color: #213547;
+  border-color: white;
   padding: 12px;
 }
 
 .add-comment-button {
-  background-color: #213547;
-  color: white;
+  background-color: white;
+  color: #213547;
   border-radius: 20px;
 }
 
 .user-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.user {
+.user-card {
   display: block;
-  border: rgb(0, 0, 98) solid;
+  justify-content: center;
+  background-color: white;
+  border-radius: 15px;
   margin: 10px;
   padding: 10px;
   font-family: Arial, Helvetica, sans-serif;
@@ -159,8 +157,8 @@ li {
 }
 
 .user-img {
-  max-width: 200px;
-  max-height: 200px;
+  width: 220px;
+  height: 200px;
   padding: 10px;
 }
 
@@ -170,21 +168,40 @@ li {
 }
 
 .topic-filters {
-  margin: 20px;
-  padding: 15px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(18, 51, 90);
+  color: white;
   font-weight: bold;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
-option {
-  font-weight: bold;
-  font-size: 1.2em;
+#filters-icon {
+  margin-right: 20px;
+  font-size: xx-large;
 }
 
-.filter-articles-button {
+#filter-articles-button {
+  margin-left: 15px;
+}
+
+.topics-list {
+  display: flex;
+  justify-content: center;
+}
+
+.topic-card {
+  justify-content: center;
+  background-color: white;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 150px;
+  width: 400px;
+}
+
+.topic-button {
   background-color: #213547;
   color: white;
+  margin: 10px;
+  border-radius: 20px;
 }
