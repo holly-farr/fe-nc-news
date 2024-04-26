@@ -8,11 +8,10 @@ export default function Users() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getAllUsers()
-      .then((users) => {
-        setSingleUser(users);
-        setIsLoading(false);
-      });
+    getAllUsers().then((users) => {
+      setSingleUser(users);
+      setIsLoading(false);
+    });
   }, []);
 
   return isLoading ? (

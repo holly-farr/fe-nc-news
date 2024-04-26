@@ -45,3 +45,11 @@ export const getAllUsers = () => {
     return users;
   });
 };
+
+
+export const getTopics = () => {
+  return api.get("/topics").then(({data: {topics}})=>{
+    return topics;
+    
+  })
+}

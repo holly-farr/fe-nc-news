@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard";
 import { getAllArticles } from "../../Utils/api";
 
+import FilterListIcon from "@mui/icons-material/FilterList";
 import ClipLoader from "react-spinners/ClipLoader";
 
-export default function Articles({ articleList, setArticleList }) {
+export default function ArticlesList() {
   const [isLoading, setIsLoading] = useState(true);
   const [topic, setTopic] = useState("");
+  const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
     getAllArticles().then((articles) => {
@@ -27,17 +29,18 @@ export default function Articles({ articleList, setArticleList }) {
     </div>
   ) : (
     <div>
-      <h1>Catch up with the latest news</h1>
       <div className="topic-filters">
-        <label>Filter by topic</label>
+        <label>
+          <FilterListIcon id="filters-icon" />{" "}
+        </label>
         <select value={topic} onChange={handleSetTopic}>
-          <option value="">-all-</option>
+          <option value="">All Articles</option>
           <option value="Cooking">Cooking</option>
           <option value="Coding">Coding</option>
           <option value="Football">Football</option>
         </select>{" "}
         <button
-          className="filter-articles-button"
+          id="filter-articles-button"
           onClick={() => {
             setTopic("");
           }}

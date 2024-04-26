@@ -1,39 +1,35 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
+
+import { useState } from "react";
 import UserContext from "./Components/UserContext";
 
-import "./App.css";
-import Header from "./Components/Header";
-import Articles from "./Components/Articles";
+import HomePage from "./Components/HomePage";
+import NavigationBar from "./Components/NavigationBar";
+import ArticlesList from "./Components/ArticlesList";
 import ArticlePage from "./Components/ArticlePage";
 import Users from "./Components/Users";
+import Topics from "./Components/Topics";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [articleList, setArticleList] = useState([]);
 
   return (
     <>
       <UserContext.Provider
         value={{ currentUser: currentUser, setCurrentUser: setCurrentUser }}
       >
-        <Header />
+        <NavigationBar />
         <Routes>
-          <Route
-            path="/articles"
-            element={
-              <Articles
-                articleList={articleList}
-                setArticleList={setArticleList}
-              />
-            }
-          />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/articles" element={<ArticlesList />} />
           <Route path="/articles/:article_id" element={<ArticlePage />} />
+          <Route path="/topics" element={<Topics />} />
           <Route path="/users" element={<Users />} />
         </Routes>
       </UserContext.Provider>
     </>
   );
-};
+}
 
 export default App;
