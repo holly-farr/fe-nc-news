@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import UserContext from "./UserContext";
 
-import { postArticleComment } from "../../Utils/api";
+import { postArticleComment } from "../Utils/api";
 
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -23,7 +23,7 @@ export default function CommentAdder({ article_id, setComments }) {
       .then((newComment) => {
         setNewComment("");
         setComments((currComments) => {
-          [newComment, ...currComments];
+         return [newComment, ...currComments];
         });
       })
       .catch((commentError) => {
@@ -40,14 +40,14 @@ export default function CommentAdder({ article_id, setComments }) {
     <form className="post-comment-form" onSubmit={handlePostComment}>
       <label htmlFor="newComment"></label>
       {commentError && (
-        <h4 id="postCommentError">
+        <h4 id="post-comment-error">
           Oops! You need to be logged in to post a comment.
         </h4>
       )}
       <input
         type="text"
         placeholder="Your comment..."
-        id="newComment"
+        id="new-comment"
         aria-multiline="true"
         value={newComment}
         onChange={(e) => {

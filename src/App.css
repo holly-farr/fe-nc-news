@@ -119,14 +119,14 @@ option {
 }
 
 .comment-votes {
-  color: rgb(4, 114, 4);
+  color: rgb(21, 148, 21);
 }
 
 .comment-date {
   width: 100%;
 }
 
-#newComment {
+#new-comment {
   margin-right: 10px;
   border-radius: 8px;
   border-color: white;
@@ -137,6 +137,10 @@ option {
   background-color: white;
   color: #213547;
   border-radius: 20px;
+}
+
+#post-comment-error {
+  color: white;
 }
 
 .user-list {
