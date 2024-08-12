@@ -3,7 +3,7 @@ import UserContext from "./UserContext";
 import { useParams } from "react-router-dom";
 
 import CommentAdder from "./CommentAdder";
-import { getArticleComments } from "../../Utils/api";
+import { getArticleComments, deleteArticleComment } from "../Utils/api";
 
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -14,6 +14,7 @@ export default function Comments() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getArticleComments(article_id).then((comments) => {
       setComments(comments);
       setIsLoading(false);
@@ -34,11 +35,18 @@ export default function Comments() {
             <li className="comment" key={comment.comment_id}>
               <div className="comment-info">
                 <h3 className="comment-author">{comment.author}</h3>
-                <h4 className="comment-votes">{comment.votes} Votes</h4>
                 <p className="comment-date">
                   {comment.created_at.slice(0, 10)}
                 </p>
-              </div>
+              <button
+                  onClick={() => {
+                    deleteArticleComment(comment.comment_id);
+                  }}
+                  className="delete-comment"
+                >
+                  <h4>Delete Comment</h4>
+                </button>
+                </div>
               <p>{comment.body}</p>
             </li>
           );

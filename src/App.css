@@ -108,25 +108,25 @@ option {
   margin-right: 10%;
 }
 
-.comment-info {
-  display: flex;
-  flex-wrap: wrap;
+.comment-info{
   color: white;
-}
-
-.comment-author {
-  margin-right: 15px;
-}
-
-.comment-votes {
-  color: rgb(4, 114, 4);
+  display: flex;
 }
 
 .comment-date {
-  width: 100%;
+  color: rgb(175, 175, 227);
+  margin-left: 5%;
 }
 
-#newComment {
+.delete-comment {
+  padding: 0px;
+  color: white;
+  background: none;
+  border-radius: 30px;
+  margin-left: 5%;
+}
+
+#new-comment {
   margin-right: 10px;
   border-radius: 8px;
   border-color: white;
@@ -138,6 +138,11 @@ option {
   color: #213547;
   border-radius: 20px;
 }
+
+#post-comment-error {
+  color: white;
+}
+
 
 .user-list {
   display: flex;
