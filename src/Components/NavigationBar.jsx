@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+
 import UserContext from "./UserContext";
 import { useContext } from "react";
+
 import SearchIcon from "@mui/icons-material/Search";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function NavigationBar() {
   const { currentUser } = useContext(UserContext);
+
   return (
     <nav>
       <ul className="menu">
@@ -27,7 +31,10 @@ export default function NavigationBar() {
           </form>
         </li>
         <li className="nav-list-item">
-          <Link to="/users">Current User: {currentUser.username}</Link>
+          <Link to="/users" id="user-login">
+            <PersonIcon id="user-icon" />
+            <h5>{currentUser.username}</h5>
+          </Link>
         </li>
       </ul>
     </nav>

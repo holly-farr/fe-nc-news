@@ -9,11 +9,11 @@
   background-color: white;
   display: flex;
   justify-content: space-evenly;
-  padding: 20px;
+  padding: 10px;
 }
 
 .nav-list-item {
-  color: #213547;
+  color: rgb(0, 130, 56);
   font-size: 1.6em;
   font-weight: 500;
   text-decoration: inherit;
@@ -31,8 +31,17 @@
 }
 
 #search-icon {
-  color: rgb(22, 37, 149);
-  font-size: xx-large;
+  color: rgb(0, 130, 56);
+  font-size: xxx-large;
+}
+
+#user-icon {
+  color: rgb(0, 130, 56);
+  font-size: xxx-large;
+}
+
+#user-login{
+   display: flex;
 }
 
 select {
@@ -142,7 +151,6 @@ option {
 #post-comment-error {
   color: white;
 }
-
 
 .user-list {
   display: flex;
