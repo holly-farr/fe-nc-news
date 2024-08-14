@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+import UserContext from "./UserContext";
+import { useContext } from "react";
+
 import UserCard from "./UserCard";
 import { getAllUsers } from "../../Utils/api";
+
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Users() {
   const [users, setSingleUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const { currentUser } = useContext(UserContext);
+
 
   useEffect(() => {
     getAllUsers().then((users) => {

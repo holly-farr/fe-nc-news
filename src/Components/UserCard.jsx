@@ -5,7 +5,7 @@ export default function UserCard({ user }) {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
     if (loggedInUser) {
       setCurrentUser(loggedInUser);
     }
@@ -20,7 +20,7 @@ export default function UserCard({ user }) {
         className="card-button"
         onClick={() => {
           setCurrentUser(user);
-          localStorage.setItem("user", user);
+          localStorage.setItem("user", JSON.stringify(user));
         }}
       >
         Login {user.username}
@@ -32,8 +32,8 @@ export default function UserCard({ user }) {
               className="card-button"
               id="logout-button"
               onClick={() => {
+                setCurrentUser({});
                 localStorage.clear();
-                setCurrentUser("");
               }}
             >
               Log Out
