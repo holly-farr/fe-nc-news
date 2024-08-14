@@ -4,14 +4,6 @@ import UserContext from "./UserContext";
 export default function UserCard({ user }) {
   const { setCurrentUser } = useContext(UserContext);
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      setCurrentUser(user);
-    } 
-  }, []);
-
-
   return (
     <li key="user" className="user-card">
       <img className="user-img" src={user.avatar_url} />
@@ -21,7 +13,7 @@ export default function UserCard({ user }) {
         className="card-button"
         onClick={() => {
           setCurrentUser(user);
-          localStorage.setItem('user', user)
+          window.localStorage.setItem('user', user)
         }}
       >
         Login {user.username}
