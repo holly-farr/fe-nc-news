@@ -1,8 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "./UserContext";
 
 export default function UserCard({ user }) {
-  const { setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    if (loggedInUser) {
+      setCurrentUser(loggedInUser);
+    }
+  }, []);
 
   return (
     <li key="user" className="user-card">
@@ -13,10 +20,26 @@ export default function UserCard({ user }) {
         className="card-button"
         onClick={() => {
           setCurrentUser(user);
+          localStorage.setItem("user", JSON.stringify(user));
         }}
       >
         Login {user.username}
       </button>
+      {(() => {
+        if (currentUser === user)
+          return (
+            <button
+              className="card-button"
+              id="logout-button"
+              onClick={() => {
+                setCurrentUser({});
+                localStorage.clear();
+              }}
+            >
+              Log Out
+            </button>
+          );
+      })()}
     </li>
   );
 }
