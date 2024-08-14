@@ -40,8 +40,8 @@
   font-size: xxx-large;
 }
 
-#user-login{
-   display: flex;
+#user-login {
+  display: flex;
 }
 
 select {
@@ -117,7 +117,7 @@ option {
   margin-right: 10%;
 }
 
-.comment-info{
+.comment-info {
   color: white;
   display: flex;
 }
@@ -175,9 +175,12 @@ option {
   padding: 10px;
 }
 
-.user-login-button {
+#logout-button {
   background-color: #213547;
   color: white;
+  margin: 4px;
+  border-radius: 30px;
+  padding: 10px;
 }
 
 .topic-filters {
