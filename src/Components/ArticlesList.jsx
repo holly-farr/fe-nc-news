@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import ArticleCard from "./ArticleCard";
-import { getAllArticles } from "../../Utils/api";
+import { getAllArticles, getArticlesByTopic } from "../../Utils/api";
 
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -20,6 +20,12 @@ export default function ArticlesList() {
 
   function handleSetTopic(e) {
     setTopic(e.target.value);
+
+    getArticlesByTopic(topic).then((topicArticles) => {
+      setIsLoading(true);
+      setArticleList(topicArticles);
+      setIsLoading(false);
+    });
   }
 
   return isLoading ? (
@@ -31,20 +37,15 @@ export default function ArticlesList() {
     <div>
       <div className="topic-filters">
         <label>
-          <FilterListIcon id="filters-icon" />{" "}
+          <FilterListIcon id="filters-icon" />
         </label>
-        <select value={topic} onChange={handleSetTopic}>
+        <select value={""} onChange={handleSetTopic}>
           <option value="">All Articles</option>
-          <option value="Cooking">Cooking</option>
-          <option value="Coding">Coding</option>
-          <option value="Football">Football</option>
-        </select>{" "}
-        <button
-          id="filter-articles-button"
-          onClick={() => {
-            setTopic("");
-          }}
-        >
+          <option value="cooking">Cooking</option>
+          <option value="coding">Coding</option>
+          <option value="football">Football</option>
+        </select>
+        <button id="filter-articles-button" onClick={handleSetTopic}>
           Clear Filters
         </button>
       </div>
