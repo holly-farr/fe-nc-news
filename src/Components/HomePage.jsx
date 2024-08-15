@@ -1,4 +1,3 @@
-import Topics from "./Topics";
 import ArticlesList from "./ArticlesList";
 
 export default function HomePage() {
