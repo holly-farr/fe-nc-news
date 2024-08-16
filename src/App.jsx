@@ -9,7 +9,6 @@ import NavigationBar from "./Components/NavigationBar";
 import ArticlesList from "./Components/ArticlesList";
 import ArticlePage from "./Components/ArticlePage";
 import Users from "./Components/Users";
-import Topics from "./Components/Topics";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -24,7 +23,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/articles" element={<ArticlesList />} />
           <Route path="/articles/:article_id" element={<ArticlePage />} />
-          <Route path="/topics" element={<Topics />} />
           <Route path="/users" element={<Users />} />
         </Routes>
       </UserContext.Provider>

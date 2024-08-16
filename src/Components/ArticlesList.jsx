@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 import ArticleCard from "./ArticleCard";
-import { getAllArticles } from "../../Utils/api";
+import { getAllArticles, getArticlesByTopic } from "../../Utils/api";
 
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function ArticlesList() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [topic, setTopic] = useState("");
   const [articleList, setArticleList] = useState([]);
+  const [topic, setTopic] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getAllArticles().then((articles) => {
@@ -19,7 +19,17 @@ export default function ArticlesList() {
   }, []);
 
   function handleSetTopic(e) {
-    setTopic(e.target.value);
+    e.preventDefault();
+
+    const topic = e.target.value;
+
+    setTopic(topic);
+
+    getArticlesByTopic(topic).then((topicArticles) => {
+      setIsLoading(true);
+      setArticleList(topicArticles);
+      setIsLoading(false);
+    });
   }
 
   return isLoading ? (
@@ -31,22 +41,18 @@ export default function ArticlesList() {
     <div>
       <div className="topic-filters">
         <label>
-          <FilterListIcon id="filters-icon" />{" "}
+          <FilterListIcon id="filters-icon" />
         </label>
-        <select value={topic} onChange={handleSetTopic}>
-          <option value="">All Articles</option>
-          <option value="Cooking">Cooking</option>
-          <option value="Coding">Coding</option>
-          <option value="Football">Football</option>
-        </select>{" "}
-        <button
-          id="filter-articles-button"
-          onClick={() => {
-            setTopic("");
-          }}
+        <select
+          id="topic-filters"
+          onChange={handleSetTopic}
+          defaultValue="All Articles"
         >
-          Clear Filters
-        </button>
+          <option value="">All Articles</option>
+          <option value="cooking">Cooking</option>
+          <option value="coding">Coding</option>
+          <option value="football">Football</option>
+        </select>
       </div>
       <ul className="articles-list">
         {articleList.map((article) => (

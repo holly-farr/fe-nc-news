@@ -15,9 +15,6 @@ export default function NavigationBar() {
         <li className="nav-list-item">
           <Link to="/">NC News </Link>
         </li>
-        <li className="nav-list-item">
-          <Link to="/topics">Topics </Link>
-        </li>
         <li>
           <form id="search-form" className="nav-list-item">
             <label htmlFor="search">
