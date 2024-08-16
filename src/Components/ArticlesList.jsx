@@ -7,9 +7,9 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function ArticlesList() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [topic, setTopic] = useState("");
   const [articleList, setArticleList] = useState([]);
+  const [topic, setTopic] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getAllArticles().then((articles) => {
@@ -19,7 +19,11 @@ export default function ArticlesList() {
   }, []);
 
   function handleSetTopic(e) {
-    setTopic(e.target.value);
+    e.preventDefault();
+
+    const topic = e.target.value;
+
+    setTopic(topic);
 
     getArticlesByTopic(topic).then((topicArticles) => {
       setIsLoading(true);
@@ -39,15 +43,16 @@ export default function ArticlesList() {
         <label>
           <FilterListIcon id="filters-icon" />
         </label>
-        <select value={""} onChange={handleSetTopic}>
+        <select
+          id="topic-filters"
+          onChange={handleSetTopic}
+          defaultValue="All Articles"
+        >
           <option value="">All Articles</option>
           <option value="cooking">Cooking</option>
           <option value="coding">Coding</option>
           <option value="football">Football</option>
         </select>
-        <button id="filter-articles-button" onClick={handleSetTopic}>
-          Clear Filters
-        </button>
       </div>
       <ul className="articles-list">
         {articleList.map((article) => (

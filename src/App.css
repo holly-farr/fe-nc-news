@@ -56,15 +56,26 @@ option {
   font-size: 1.1em;
 }
 
-.filter-articles-button {
-  background-color: white;
-  color: #213547;
-}
-
 .articles-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.topic-filters {
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+#filters-icon {
+  margin-right: 20px;
+  font-size: xx-large;
+}
+
+#filter-articles-button {
+  margin-left: 15px;
 }
 
 .article-card {
@@ -183,41 +194,3 @@ option {
   padding: 10px;
 }
 
-.topic-filters {
-  color: white;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-}
-
-#filters-icon {
-  margin-right: 20px;
-  font-size: xx-large;
-}
-
-#filter-articles-button {
-  margin-left: 15px;
-}
-
-.topics-list {
-  display: flex;
-  justify-content: center;
-}
-
-.topic-card {
-  justify-content: center;
-  background-color: white;
-  border-radius: 15px;
-  margin: 10px;
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  height: 150px;
-  width: 400px;
-}
-
-.topic-button {
-  background-color: #213547;
-  color: white;
-  margin: 10px;
-  border-radius: 20px;
-}
